@@ -3,47 +3,95 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:SampleXamarin.ViewModels"
+             xmlns:models="clr-namespace:SampleXamarin.Models"
              mc:Ignorable="d"
              x:Class="SampleXamarin.Views.Home"
              Title="Главная">
-    <StackLayout>
 
-        <StackLayout VerticalOptions="FillAndExpand">
+    <d:ContentPage.BindingContext>
+        <vm:HomeVm/>
+    </d:ContentPage.BindingContext>
+
+    <AbsoluteLayout>
+
+        <!--Весь экран-->
+        <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
+                     AbsoluteLayout.LayoutFlags="SizeProportional">
+            <!--Скролящийся контент-->
+            <ListView VerticalOptions="FillAndExpand"
+                      ItemsSource="{Binding Tracks}"
+                      HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal"
+                                         Padding="15,5,15,5">
+                                <d:StackLayout.BindingContext>
+                                    <models:Track/>
+                                </d:StackLayout.BindingContext>
+
+                                <Label Text="{Binding Position, StringFormat='{0}.'}"
+                                       Margin="0,0,20,0"/>
+
+                                <Label Text="{Binding Artist}"/>
+                                <Label Text=" - "/>
+                                <Label Text="{Binding Name}"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <!--<Button Text="Add"
+                    Command="{Binding CommandAdd}"/>-->
+            
+            <!--Панель управления треками (которая находится внизу экрана)-->
+            <Grid VerticalOptions="End"
+                  ColumnSpacing="0"
+                  Padding="0,0,0,15"
+                  BackgroundColor="White">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <!--Previous-->
+                <Button Grid.Column="0"
+                        BackgroundColor="White"
+                        ImageSource="ic_skip_previous"/>
+
+                <!--Play-->
+                <Button Grid.Column="1"
+                        BackgroundColor="White"
+                        ImageSource="ic_play_circle"/>
+
+                <!--Next-->
+                <Button Grid.Column="2"
+                        BackgroundColor="White"
+                        ImageSource="ic_skip_next"/>
+                <!--Save-->
+                <Button Grid.Column="3"
+                        BackgroundColor="White"
+                        ImageSource="ic_content_save"/>
+                <!--Download-->
+                <Button Grid.Column="4"
+                        BackgroundColor="White"
+                        ImageSource="ic_cloud_download"/>
+            </Grid>
         </StackLayout>
 
-        <Grid VerticalOptions="End"
-              ColumnSpacing="0"
-              BackgroundColor="White">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
+        <Button AbsoluteLayout.LayoutBounds="1, .8, 104, 64"
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                Margin="0,0,40,0"
+                BackgroundColor="DarkSeaGreen"
+                Command="{Binding CommandAdd}"
+                CornerRadius="32"
+                FontSize="32"
+                Text="+"/>
 
-            <!--Previous-->
-            <Button Grid.Column="0"
-                    BackgroundColor="Transparent"
-                    />
-
-            <!--Play-->
-            <Button Grid.Column="1"
-                    BackgroundColor="Transparent"
-                    />
-
-            <!--Next-->
-            <Button Grid.Column="2"
-                    BackgroundColor="Transparent"
-                    ImageSource="ic_skip_next"/>
-            <!--Save-->
-            <Button Grid.Column="3"
-                    BackgroundColor="Transparent"
-                    />
-            <!--Download-->
-            <Button Grid.Column="4"
-                    BackgroundColor="Transparent"
-                    />
-        </Grid>
-    </StackLayout>
+    </AbsoluteLayout>
 </ContentPage>
