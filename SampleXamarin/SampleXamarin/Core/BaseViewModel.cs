@@ -9,7 +9,7 @@ namespace SampleXamarin.Core
     {
         public BaseViewModel()
         {
-
+            View.BindingContext = this;
         }
 
         public abstract Page View { get; set; }
