@@ -10,6 +10,8 @@ namespace SampleXamarin
         {
             InitializeComponent();
 
+            HotReloader.Current.Run(this);
+
             var vm = new ViewModels.MainVm();
 
             MainPage = new NavigationPage(vm.View);

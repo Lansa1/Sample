@@ -31,10 +31,12 @@
                     BackgroundColor="Transparent"
                     TextColor="Green"
                     BorderWidth="1"
-                    BorderColor="Green"/>
+                    BorderColor="Green"
+                    Command="{Binding CommandAuth}"/>
             <Button Text="Регистрация"
                     BackgroundColor="Green"
-                    TextColor="White"/>
+                    TextColor="White"
+                    Command="{Binding CommandRegister}"/>
         </StackLayout>
     </StackLayout>
 
