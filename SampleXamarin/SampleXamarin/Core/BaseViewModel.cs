@@ -9,7 +9,7 @@ namespace SampleXamarin.Core
     {
         public BaseViewModel()
         {
-            View.BindingContext = this;
+            View.BindingContext = this; // привязка к странице 
         }
 
         public abstract Page View { get; set; }
