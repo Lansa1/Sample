@@ -17,7 +17,7 @@ namespace SampleXamarin.ViewModels
 
         public LockCommand CommandRegister { get; set; }
         public LockCommand CommandAuth { get; set; }
-
+        
         public override Page View { get; set; } = new Views.MainPage();
 
         private async Task ActionRegister()

@@ -14,7 +14,6 @@
     </d:ContentPage.BindingContext>
 
     <AbsoluteLayout>
-
         <!--Весь экран-->
         <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
                      AbsoluteLayout.LayoutFlags="SizeProportional">
@@ -22,6 +21,13 @@
             <ListView VerticalOptions="FillAndExpand"
                       ItemsSource="{Binding Tracks}"
                       HasUnevenRows="True">
+                <ListView.Header>
+                    <StackLayout>
+                        <Button Text="Рекомендации"
+                                Command="{Binding CommandRecomend}"/>
+                    </StackLayout>
+                </ListView.Header>
+
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -30,10 +36,8 @@
                                 <d:StackLayout.BindingContext>
                                     <models:Track/>
                                 </d:StackLayout.BindingContext>
-
                                 <Label Text="{Binding Position, StringFormat='{0}.'}"
                                        Margin="0,0,20,0"/>
-
                                 <Label Text="{Binding Artist}"/>
                                 <Label Text=" - "/>
                                 <Label Text="{Binding Name}"/>
@@ -81,6 +85,7 @@
                 <Button Grid.Column="4"
                         BackgroundColor="White"
                         ImageSource="ic_cloud_download"/>
+
             </Grid>
         </StackLayout>
 

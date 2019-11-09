@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
 using SampleXamarin.Core;
 using SampleXamarin.Models;
 using Xamarin.Forms;
@@ -11,12 +12,12 @@ namespace SampleXamarin.ViewModels
     public class HomeVm:BaseViewModel
     {
         private Track selectedTrack;
-        
         public HomeVm()
         {
             CommandAdd = new LockCommand(this, ActionAdd);
+            CommandRecomend = new LockCommand(this, ActionRecomend);
         }
-
+      
         public Track SelectedTrack { 
             get => selectedTrack;
             set {  
@@ -24,13 +25,11 @@ namespace SampleXamarin.ViewModels
                 ActionSelectTrack(value);
             } 
         }
-
         public LockCommand CommandAdd { get; set; }
         public LockCommand CommandSelectTrack { get; set; }
+        public LockCommand CommandRecomend { get; set; }
         public ObservableCollection<Track> Tracks { get; set; } = new ObservableCollection<Track>();
-
         public override Page View { get; set; } = new Views.Home();
-
         private void ActionAdd()
         {
             var item = new Track
@@ -42,7 +41,6 @@ namespace SampleXamarin.ViewModels
             };
             Tracks.Add(item);
         }
-
         private void ActionSelectTrack(object obj)
         {
             if (obj is Track track)
@@ -50,5 +48,11 @@ namespace SampleXamarin.ViewModels
 
             }
         }
+        private async Task ActionRecomend()
+        {
+            var vm = new RecomendsVm();
+            await NavigateTo(vm);
+        }
+
     }
 }
